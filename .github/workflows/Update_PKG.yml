@@ -2,8 +2,10 @@ name: Update PKG
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 0 16 * * *
+  #schedule:
+    #- cron: 0 16 * * *
+  watch:
+      types: [started]
 
 jobs:
   build:
@@ -71,8 +73,8 @@ jobs:
 
       - name: Commit file
         run: |
-          git config --global user.email simonsqiu@foxmail.com
-          git config --global user.name SimonsQiu
+          git config --global user.email lixp@live.com
+          git config --global user.name ilxp
           git add .
           git commit -m "Update `date +%Y/%m/%d\ %H:%M:%S\ %Z`" -a
         continue-on-error: true
@@ -80,7 +82,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{secrets.REPO_TOKEN}}
           branch: master
         continue-on-error: true
 
